@@ -5,4 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Frontend">
+
+    <TextView
+        android:id="@+id/textViewClock"
+        android:layout_width="168dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:gravity="center"
+        android:text="05:12"
+        android:textColor="@android:color/white"
+        android:textSize="48sp" />
+
 </RelativeLayout>
