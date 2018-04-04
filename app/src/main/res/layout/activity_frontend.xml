@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Frontend">
 
+    <!--TextView placeholder for clock-->
     <TextView
         android:id="@+id/textViewClock"
         android:layout_width="168dp"
@@ -17,5 +18,14 @@
         android:text="05:12"
         android:textColor="@android:color/white"
         android:textSize="48sp" />
+
+    <!--TextView placeholder for Info-->
+    <TextView
+        android:id="@+id/textViewInfo"
+        android:layout_width="163dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="163dp" />
 
 </RelativeLayout>
