@@ -36,7 +36,12 @@ public class Frontend extends AppCompatActivity {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-
+                    //clear info text
+                    Info.setText("");
+                    //convert user input to string
+                    String userPin = Pin.getText().toString();
+                    //clear editText
+                    Pin.setText("");
                     return true;
                 }
                 return false;
