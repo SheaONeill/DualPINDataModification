@@ -49,4 +49,18 @@
         android:textColor="#FFFFFF"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="51dp" />
+
+    <!--ref:https://www.tutorialspoint.com/android/android_loading_spinner.htm-->
+    <!--progress bar for PIN2-->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextPIN"
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:clickable="false"
+        android:progressDrawable="@drawable/circular_progress_bar" />
 </RelativeLayout>
