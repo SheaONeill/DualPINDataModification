@@ -1,10 +1,13 @@
 package ie.shea.dualpindatamodification;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -47,6 +50,32 @@ public class Frontend extends AppCompatActivity {
                 return false;
             }
         };
+    }
+    //this method validates userPin
+    void validatePin(String userPin, View v) {
+
+        //check if userPin is normal PIN
+        if (userPin.equals(PIN1)) {
+            //main parent activity will listen for this result
+            setResult(RESULT_OK);
+            //finish activity and continue as normal
+            finish();
+            //check if userPin is abnornal PIN
+        } else if (userPin.equals(PIN2)) {
+            //remove editText PIN
+            Pin.setVisibility(View.INVISIBLE);
+            //start spinning loading icon
+            spinner.setVisibility(View.VISIBLE);
+            spinner.setFocusable(true);
+            // info loading message
+            Info.setText("Loading....");
+            //hide soft keyboard
+            InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            //start running scripts now
+        } else
+            // try again message
+            Info.setText("Please try again");
     }
 
 }
