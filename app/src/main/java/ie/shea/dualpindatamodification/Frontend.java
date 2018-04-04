@@ -31,6 +31,9 @@ public class Frontend extends AppCompatActivity {
         Pin = (EditText) findViewById(R.id.editTextPIN);
         Pin.setOnEditorActionListener(getTextViewPINListener());
         Pin.setFocusable(true);
+        Info = (TextView) findViewById(R.id.textViewInfo);
+        spinner = (ProgressBar) findViewById(R.id.progressBar);
+        spinner.setVisibility(View.GONE);
     }
 
     //method for action listener for send button
