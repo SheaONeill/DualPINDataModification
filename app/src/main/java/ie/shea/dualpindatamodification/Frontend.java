@@ -48,6 +48,8 @@ public class Frontend extends AppCompatActivity {
                     String userPin = Pin.getText().toString();
                     //clear editText
                     Pin.setText("");
+                    //call validatePin method
+                    validatePin(userPin, textView);
                     return true;
                 }
                 return false;
