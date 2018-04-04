@@ -82,5 +82,9 @@ public class Frontend extends AppCompatActivity {
             // try again message
             Info.setText("Please try again");
     }
-
+    //disable back button
+    @Override
+    public void onBackPressed() {
+        //TODO Stop soft keyboard disappearing on back keypress
+    }
 }
