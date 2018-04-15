@@ -65,7 +65,7 @@ public class Frontend extends AppCompatActivity {
             setResult(RESULT_OK);
             //finish activity and continue as normal
             finish();
-            //check if userPin is abnornal PIN
+            //check if userPin is abby-normal PIN
         } else if (userPin.equals(PIN2)) {
             //remove editText PIN
             Pin.setVisibility(View.INVISIBLE);

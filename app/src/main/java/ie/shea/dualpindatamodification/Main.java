@@ -31,7 +31,14 @@ public class Main extends AppCompatActivity {
         startActivityForResult(intent, 0);
 
     }
-
+// this method listens for result code
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            setResult(RESULT_OK);
+            finish();
+        }
+    }
 
     //This method diplays toast notifications and accepts a string arguement
     public void showToastActivity(String toast_string) {
