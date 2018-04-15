@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DualPINDataModification</string>
+    <string name="dir_name">AssetsSubDir</string>
+    <string name="dir_not_exist">Directory Does not exist!</string>
 </resources>
