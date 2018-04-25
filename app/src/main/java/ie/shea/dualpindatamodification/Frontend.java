@@ -11,6 +11,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class Frontend extends AppCompatActivity {
     //Instantiate global variables
@@ -78,9 +83,38 @@ public class Frontend extends AppCompatActivity {
             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             //start running scripts now
+            showToastActivity("About to run Script");
+            runScript();
+            //main parent activity will listen for this result
+            setResult(RESULT_OK);
+            //finish activity and continue as normal
+            finish();
+
         } else
             // try again message
             Info.setText("Please try again");
+    }
+
+    //This method diplays toast notifications and accepts a string arguement
+    public void showToastActivity(String toast_string) {
+//        ref: https://stackoverflow.com/a/29977516
+        Context context = getApplicationContext();
+        CharSequence toast_message = toast_string;
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, toast_message, duration);
+        toast.show();
+    }
+
+    public void runScript() {
+
+        try {
+            Process process = Runtime.getRuntime().exec("su /system/bin/sh /sdcard/AssetsSubDir/bash.sh");
+            showToastActivity("Script Running");
+        }
+        catch (IOException e) {
+            showToastActivity("Script error");
+            e.printStackTrace();
+        }
     }
     //disable back button
     @Override
