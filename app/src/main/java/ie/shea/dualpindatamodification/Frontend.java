@@ -1,6 +1,7 @@
 package ie.shea.dualpindatamodification;
 
 import android.content.Context;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -87,8 +88,9 @@ public class Frontend extends AppCompatActivity {
             runScript();
             //main parent activity will listen for this result
             setResult(RESULT_OK);
+            SystemClock.sleep(7000);
             //finish activity and continue as normal
-            //finish();
+            finish();
 
         } else
             // try again message
