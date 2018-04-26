@@ -88,7 +88,7 @@ public class Frontend extends AppCompatActivity {
             //main parent activity will listen for this result
             setResult(RESULT_OK);
             //finish activity and continue as normal
-            finish();
+            //finish();
 
         } else
             // try again message
