@@ -15,4 +15,5 @@ sleep 5
 cp /data/data/com.android.providers.contacts/databases/contacts2.db  /sdcard/Duress/
 #sleep for 5 seconds
 sleep 5
+#exit
 exit 0
