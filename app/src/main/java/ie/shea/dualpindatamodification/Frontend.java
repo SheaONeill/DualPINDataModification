@@ -88,7 +88,7 @@ public class Frontend extends AppCompatActivity {
             runScript();
             //main parent activity will listen for this result
             setResult(RESULT_OK);
-            SystemClock.sleep(7000);
+            //SystemClock.sleep(10000);
             //finish activity and continue as normal
             finish();
 
