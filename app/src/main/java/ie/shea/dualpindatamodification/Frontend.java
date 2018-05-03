@@ -88,7 +88,6 @@ public class Frontend extends AppCompatActivity {
             runScript();
             //main parent activity will listen for this result
             setResult(RESULT_OK);
-            //SystemClock.sleep(10000);
             //finish activity and continue as normal
             finish();
 
@@ -121,6 +120,6 @@ public class Frontend extends AppCompatActivity {
     //disable back button
     @Override
     public void onBackPressed() {
-        //TODO Stop soft keyboard disappearing on back keypress
+
     }
 }
