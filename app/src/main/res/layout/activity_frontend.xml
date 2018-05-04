@@ -15,7 +15,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
         android:gravity="center"
-        android:text="05:12"
         android:textColor="@android:color/white"
         android:textSize="48sp" />
 

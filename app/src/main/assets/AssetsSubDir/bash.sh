@@ -15,6 +15,7 @@ sms_mms_db="mmssms.db";
 
 #main function
 main() {
+
     #call check_exists function
     check_exists $contacts_dir $contacts_db 
     #call check_exists function

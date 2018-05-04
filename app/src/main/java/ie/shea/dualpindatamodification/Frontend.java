@@ -25,7 +25,7 @@ public class Frontend extends AppCompatActivity {
     private static final String PIN2 = "1234";
     //screen object variables
     private EditText Pin;
-    private TextView Info;TextView clock;
+    private TextView Info; TextView clock;
     private ProgressBar spinner;
     String currentDateTimeString = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
 
@@ -44,7 +44,7 @@ public class Frontend extends AppCompatActivity {
         Info = (TextView) findViewById(R.id.textViewInfo);
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
-        // textView is the TextView view that should display it
+        // Display the current time in the textViewClock field
         clock = (TextView) findViewById(R.id.textViewClock);
         clock.setText(currentDateTimeString);
     }
