@@ -1,7 +1,6 @@
 package ie.shea.dualpindatamodification;
 
 import android.content.Context;
-import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -17,6 +16,8 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.util.Date;
 
 public class Frontend extends AppCompatActivity {
     //Instantiate global variables
@@ -24,8 +25,11 @@ public class Frontend extends AppCompatActivity {
     private static final String PIN2 = "1234";
     //screen object variables
     private EditText Pin;
-    private TextView Info;
+    private TextView Info;TextView clock;
     private ProgressBar spinner;
+    String currentDateTimeString = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,9 @@ public class Frontend extends AppCompatActivity {
         Info = (TextView) findViewById(R.id.textViewInfo);
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
+        // textView is the TextView view that should display it
+        clock = (TextView) findViewById(R.id.textViewClock);
+        clock.setText(currentDateTimeString);
     }
 
     //method for action listener for send button
