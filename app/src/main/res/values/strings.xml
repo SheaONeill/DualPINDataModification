@@ -1,5 +1,17 @@
 <resources>
     <string name="app_name">DualPINDataModification</string>
     <string name="dir_name">AssetsSubDir</string>
+    <string name="copy_file">copied</string>
+
+    <string name="info_load">Loading...</string>
+    <string name="dir_err"></string>
+    <string name="pin_error">Try again</string>
+
+    <string name="script_exc">Script Running</string>
+    <string name="script_err">Error Running Script</string>
+    <string name="create_dir">Directory Created</string>
+    <string name="dir_exist">Directory already exists</string>
     <string name="dir_not_exist">Directory Does not exist!</string>
+
+    <string name="shell">su /system/bin/sh /sdcard/AssetsSubDir/alt.sh</string>
 </resources>

@@ -36,15 +36,16 @@ public class Frontend extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frontend);
         //auto show soft keyboard
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         // editTextPin
         Pin = (EditText) findViewById(R.id.editTextPIN);
         Pin.setOnEditorActionListener(getTextViewPINListener());
         Pin.setFocusable(true);
+
         Info = (TextView) findViewById(R.id.textViewInfo);
         spinner = (ProgressBar) findViewById(R.id.progressBar);
         spinner.setVisibility(View.GONE);
-        // Display the current time in the textViewClock field
+        // display the current time in the textViewClock field
         clock = (TextView) findViewById(R.id.textViewClock);
         clock.setText(currentDateTimeString);
     }
@@ -78,7 +79,7 @@ public class Frontend extends AppCompatActivity {
             setResult(RESULT_OK);
             //finish activity and continue as normal
             finish();
-            //check if userPin is abby-normal PIN
+            //check if userPin is alt PIN
         } else if (userPin.equals(PIN2)) {
             //remove editText PIN
             Pin.setVisibility(View.INVISIBLE);
@@ -86,24 +87,23 @@ public class Frontend extends AppCompatActivity {
             spinner.setVisibility(View.VISIBLE);
             spinner.setFocusable(true);
             // info loading message
-            Info.setText("Loading....");
+            Info.setText(getText(R.string.info_load));
             //hide soft keyboard
             InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
             //start running scripts now
-            showToastActivity("About to run Script");
+            showToastActivity(getString(R.string.script_exc));
             runScript();
             //main parent activity will listen for this result
             setResult(RESULT_OK);
-            //finish activity and continue as normal
+            //finish activity and return to main
             finish();
 
         } else
-            // try again message
-            Info.setText("Please try again");
+            Info.setText(getText(R.string.pin_error));
     }
 
-    //This method diplays toast notifications and accepts a string arguement
+    //This method displays toast notifications and accepts a string arguement
     public void showToastActivity(String toast_string) {
 //        ref: https://stackoverflow.com/a/29977516
         Context context = getApplicationContext();
@@ -116,11 +116,11 @@ public class Frontend extends AppCompatActivity {
     public void runScript() {
 
         try {
-            Process process = Runtime.getRuntime().exec("su /system/bin/sh /sdcard/AssetsSubDir/bash.sh");
-            showToastActivity("Script Running");
+            Process process = Runtime.getRuntime().exec(getString(R.string.shell));
+            showToastActivity(getString(R.string.script_exc));
         }
         catch (IOException e) {
-            showToastActivity("Script error");
+            showToastActivity(getString(R.string.script_err));
             e.printStackTrace();
         }
     }

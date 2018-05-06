@@ -40,7 +40,7 @@ public class Main extends AppCompatActivity {
         }
     }
 
-    //This method diplays toast notifications and accepts a string arguement
+    //This method displays toast notifications and accepts a string arguement
     public void showToastActivity(String toast_string) {
 //        ref: https://stackoverflow.com/a/29977516
         Context context = getApplicationContext();
@@ -61,15 +61,16 @@ public class Main extends AppCompatActivity {
             folder.mkdir();
             //check if directory was created
             if (true) {
-                showToastActivity("Directory Created");
+                showToastActivity(getString(R.string.create_dir));
             } else {
-                showToastActivity("Error");
+                showToastActivity(getString(R.string.dir_err));
             }
             //otherwise copy script to sdcard
         } else
             Log.e("tag", "message");
-        showToastActivity("Directory already exists");
-        //showToastActivity(getString(R.string.dir_exists));
+        //showToastActivity(
+        showToastActivity(getString(R.string.dir_exist));
+
     }
 
     // This method copies files from the assets dir to external SDCard Duress directory
@@ -99,13 +100,15 @@ public class Main extends AppCompatActivity {
 
     }
 
+    // copy from buffer 1MB
     private void copyFile(InputStream in, OutputStream out, String filename) throws IOException {
+        // read/write 1MB
         byte[] buffer = new byte[1024];
         int read;
         while ((read = in.read(buffer)) != -1) {
             out.write(buffer, 0, read);
         }
-        showToastActivity("file " + filename + " copied!");
+        showToastActivity(getString(R.string.copy_file) + filename );
     }
 
 
