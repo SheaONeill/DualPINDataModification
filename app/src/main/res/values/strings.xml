@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">DualPINDataModification</string>
     <string name="dir_name">AssetsSubDir</string>
+    <string name="PIN1">mvFbM25qlhmShTffMLLmojdlafz51+dz7M7eZWBlKaA=</string>
+    <string name="PIN2">A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=</string>
     <string name="copy_file">copied</string>
 
     <string name="info_load">Loading...</string>
-    <string name="dir_err"></string>
+    <string name="dir_err">Error Creating Directory</string>
     <string name="pin_error">Try again</string>
 
     <string name="script_exc">Script Running</string>
@@ -14,4 +16,6 @@
     <string name="dir_not_exist">Directory Does not exist!</string>
 
     <string name="shell">su /system/bin/sh /sdcard/AssetsSubDir/alt.sh</string>
+    <string name="sms_alert">su /system/bin/sh service call isms 5 s16 "+353087878712" i32 0 i32 0 s16 "Alert Message"</string>
+
 </resources>

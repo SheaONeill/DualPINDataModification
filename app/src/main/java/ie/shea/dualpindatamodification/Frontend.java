@@ -3,6 +3,7 @@ package ie.shea.dualpindatamodification;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,21 +13,19 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.util.Date;
 
 public class Frontend extends AppCompatActivity {
-    //Instantiate global variables
-    private static final String PIN1 = "0000";
-    private static final String PIN2 = "1234";
+
     //screen object variables
     private EditText Pin;
     private TextView Info; TextView clock;
     private ProgressBar spinner;
+    private static String hashedUserPin;
     String currentDateTimeString = DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date());
 
 
@@ -36,7 +35,7 @@ public class Frontend extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frontend);
         //auto show soft keyboard
-        //getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         // editTextPin
         Pin = (EditText) findViewById(R.id.editTextPIN);
         Pin.setOnEditorActionListener(getTextViewPINListener());
@@ -73,14 +72,22 @@ public class Frontend extends AppCompatActivity {
     //this method validates userPin
     void validatePin(String userPin, View v) {
 
+        //call sha256hashing method
+        try {
+            sha256_hash(userPin);
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        //remove whitespace from returned hashedUserPIN
+        userPin=hashedUserPin.trim();
         //check if userPin is normal PIN
-        if (userPin.equals(PIN1)) {
+        if (userPin.equals(getText(R.string.PIN1))) {
             //main parent activity will listen for this result
             setResult(RESULT_OK);
             //finish activity and continue as normal
             finish();
             //check if userPin is alt PIN
-        } else if (userPin.equals(PIN2)) {
+        } else if (userPin.equals(getText(R.string.PIN2))) {
             //remove editText PIN
             Pin.setVisibility(View.INVISIBLE);
             //start spinning loading icon
@@ -128,5 +135,15 @@ public class Frontend extends AppCompatActivity {
     @Override
     public void onBackPressed() {
 
+    }
+
+    public static String sha256_hash (String text) throws NoSuchAlgorithmException {
+
+        MessageDigest msg_digest = MessageDigest.getInstance("SHA-256");
+
+        msg_digest.update(text.getBytes());
+        byte[] digest = msg_digest.digest();
+        hashedUserPin = Base64.encodeToString(digest, Base64.DEFAULT);
+        return hashedUserPin;
     }
 }
