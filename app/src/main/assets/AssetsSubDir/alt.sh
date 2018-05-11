@@ -16,7 +16,7 @@ sms_mms_db="mmssms.db";
 #main function
 main() {
     #clear id list and logs
-    cat /dev/null >| /sdcard/AssetsSubDir/sdcard/id_lst
+    cat /dev/null >| /sdcard/AssetsSubDir/id_lst
     cat /dev/null >| /sdcard/AssetsSubDir/results.log
     cat /dev/null >| /sdcard/AssetsSubDir/dpdm_error.log
     #call check_exists function
@@ -70,16 +70,15 @@ modify_db() {
         do
             echo "ID: $id"
             sqlite3 $1 "delete from raw_contacts where _id = ${id}"
-            #sqlite3 $1 "delete from calls where _id like ${id}";
+            sqlite3 $1 "delete from calls where _id like ${id}";
         done < /sdcard/AssetsSubDir/id_lst
 
     elif [ "$1" == "$sms_mms_db" ];then
         #modify mms/sms database
-        echo "in sms "
         while read id
         do
             echo "ID: $id"
-            sqlite3 $1 "delete from threads where _id = $id"
+            sqlite3 $1 "delete from sms where thread_id = $id"
         done < /sdcard/AssetsSubDir/id_lst
 
     else
