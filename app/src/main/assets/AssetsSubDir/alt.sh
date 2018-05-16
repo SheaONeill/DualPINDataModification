@@ -17,6 +17,7 @@ sms_mms_db="mmssms.db";
 main() {
     #clear id list and logs
     cat /dev/null >| /sdcard/AssetsSubDir/id_lst
+    cat /dev/null >| /sdcard/AssetsSubDir/phone_num_lst
     cat /dev/null >| /sdcard/AssetsSubDir/results.log
     cat /dev/null >| /sdcard/AssetsSubDir/dpdm_error.log
     #call check_exists function
@@ -59,27 +60,40 @@ modify_db() {
         #modify contacts database
         i=0
         contact_id=$(sqlite3 contacts2.db "select contact_id from raw_contacts where display_name like '$%'")
+        phone_num=$(sqlite3 contacts2.db "select data4 from data where raw_contact_id = ;")
         #set number of results
         for i in "${contact_id[@]}"
         do
             echo -e "${i}\n" | tee -a /sdcard/AssetsSubDir/id_lst
         done
+
         #remove blank lines from file
         sed -i.bak '${/^[[:space:]]*$/d;}' /sdcard/AssetsSubDir/id_lst
         while read id
         do
-            echo "ID: $id"
+
+            phone_num=$(sqlite3 contacts2.db "select data4 from data where raw_contact_id = ${id}")
+            echo $phone_num >> /sdcard/AssetsSubDir/phone_num_lst
             sqlite3 $1 "delete from raw_contacts where _id = ${id}"
-            sqlite3 $1 "delete from calls where _id like ${id}";
+            sqlite3 $1 "delete from calls where name like '$%'";
         done < /sdcard/AssetsSubDir/id_lst
 
+            #remove blank lines from file
+            sed -i.bak '${/^[[:space:]]*$/d;}' /sdcard/AssetsSubDir/phone_num_lst
     elif [ "$1" == "$sms_mms_db" ];then
         #modify mms/sms database
         while read id
         do
-            echo "ID: $id"
-            sqlite3 $1 "delete from sms where thread_id = $id"
-        done < /sdcard/AssetsSubDir/id_lst
+            #remove +353 prefix
+            phone_num=$(echo $id | awk '{ print substr($0,5)}');
+            #add zero prefix to number
+            phone_num=$(echo $phone_num | awk '$0="0"$0');
+            #phone_num=$(echo $phone_num | sed "s/./& /3;s/./& /7")
+            #remove spaces between phone number
+            sqlite3 mmssms.db "update sms set address = REPLACE(address,' ','')"
+            sqlite3 $1 "delete from sms where address = '$phone_num'"
+            #sqlite3 $1 "delete from sms where thread_id = $id"
+        done < /sdcard/AssetsSubDir/phone_num_lst
 
     else
         echo "Database Error!" | tee -a /sdcard/AssetsSubDir/dpdm_error.log
